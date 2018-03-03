@@ -63,3 +63,5 @@ Desktop.ini
 
 ### VS subfolder
 .vs/*
+.vs/todo/v15/Server/sqlite3/storage.ide
+.vs/config/applicationhost.config
