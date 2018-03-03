@@ -7,7 +7,7 @@
 
     public class ItemController : Controller
     {
-        [ActionName("Index")]
+        /*[ActionName("Index")]
         public async Task<ActionResult> IndexAsync()
         {
             var items = await DocumentDBRepository<Item>.GetItemsAsync(d => !d.Completed);
@@ -98,6 +98,6 @@
         {
             Item item = await DocumentDBRepository<Item>.GetItemAsync(id, category);
             return View(item);
-        }
+        } */
     }
 }

@@ -13,13 +13,19 @@ namespace todo
     using Microsoft.Azure.Documents.Linq;
     using System.Collections.ObjectModel;
 
-    public static class DocumentDBRepository<T> where T : class
+    public class DocumentDBRepository<T> where T : class
     {
-        private static readonly string DatabaseId = ConfigurationManager.AppSettings["database"];
-        private static readonly string CollectionId = ConfigurationManager.AppSettings["collection"];
-        private static DocumentClient client;
+        private readonly string DatabaseId = ConfigurationManager.AppSettings["database"];
+        private readonly string CollectionId;
+        private DocumentClient client;
 
-        public static async Task<T> GetItemAsync(string id, string category)
+        public DocumentDBRepository(string collectionId)
+        {
+            CollectionId = collectionId;
+            Initialize();
+        }
+
+        public async Task<T> GetItemAsync(string id, string category)
         {
             try
             {
@@ -41,7 +47,7 @@ namespace todo
             }
         }
 
-        public static async Task<T> GetItemAsync(string id)
+        public async Task<T> GetItemAsync(string id)
         {
             try
             {
@@ -62,7 +68,7 @@ namespace todo
             }
         }
 
-        public static async Task<IEnumerable<T>> GetItemsAsync(Expression<Func<T, bool>> predicate)
+        public async Task<IEnumerable<T>> GetItemsAsync(Expression<Func<T, bool>> predicate)
         {
             IDocumentQuery<T> query = client.CreateDocumentQuery<T>(
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId),
@@ -79,29 +85,29 @@ namespace todo
             return results;
         }
 
-        public static async Task<Document> CreateItemAsync(T item)
+        public async Task<Document> CreateItemAsync(T item)
         {
             return await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(DatabaseId, CollectionId), item);
         }
 
-        public static async Task<Document> UpdateItemAsync(string id, T item)
+        public async Task<Document> UpdateItemAsync(string id, T item)
         {
             return await client.ReplaceDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id), item);
         }
 
-        public static async Task DeleteItemAsync(string id, string category)
+        public async Task DeleteItemAsync(string id, string category)
         {
             await client.DeleteDocumentAsync(UriFactory.CreateDocumentUri(DatabaseId, CollectionId, id), new RequestOptions(){PartitionKey = new PartitionKey(category)});
         }
 
-        public static void Initialize()
+        private void Initialize()
         {
             client = new DocumentClient(new Uri(ConfigurationManager.AppSettings["endpoint"]), ConfigurationManager.AppSettings["authKey"]);
             CreateDatabaseIfNotExistsAsync().Wait();
             CreateCollectionIfNotExistsAsync().Wait();
         }
 
-        private static async Task CreateDatabaseIfNotExistsAsync()
+        private async Task CreateDatabaseIfNotExistsAsync()
         {
             try
             {
@@ -120,7 +126,7 @@ namespace todo
             }
         }
 
-        private static async Task CreateCollectionIfNotExistsAsync()
+        private async Task CreateCollectionIfNotExistsAsync()
         {
             try
             {
