@@ -59,3 +59,7 @@ ehthumbs.db
 
 # Folder config file
 Desktop.ini
+
+
+### VS subfolder
+.vs*
