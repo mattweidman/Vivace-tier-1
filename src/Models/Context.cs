@@ -1,4 +1,4 @@
-﻿namespace todo.Models
+﻿namespace vivace.Models
 {
     using System.Data.Entity;
 

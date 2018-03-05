@@ -1,4 +1,4 @@
-﻿namespace todo
+﻿namespace vivace
 {
     using System.Web.Mvc;
     using System.Web.Routing;
@@ -12,7 +12,8 @@
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Item", action = "Index", id = UrlParameter.Optional });
+                defaults: new { controller = "Item", action = "Index", id = UrlParameter.Optional },
+                namespaces: new string[] { "vivace" });
         }
     }
 }

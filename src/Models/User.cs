@@ -1,4 +1,4 @@
-﻿namespace todo.Models
+﻿namespace vivace.Models
 {
     using Microsoft.Azure.Documents;
     using Newtonsoft.Json;

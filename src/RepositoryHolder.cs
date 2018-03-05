@@ -1,6 +1,6 @@
-﻿using todo.Models;
+﻿using vivace.Models;
 
-namespace todo
+namespace vivace
 {
     /** Holds DocumentDBRepositories of all collections */
     public static class RepositoryHolder

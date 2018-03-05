@@ -1,6 +1,6 @@
-﻿using todo.Models;
+﻿using vivace.Models;
 
-namespace todo
+namespace vivace
 {
     using System;
     using System.Collections.Generic;
