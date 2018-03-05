@@ -7,6 +7,7 @@
 
     public class UserController : Controller
     {
+
         // GET: User/id
         [ActionName("Index")]
         public async Task<ActionResult> IndexAsync(string id)

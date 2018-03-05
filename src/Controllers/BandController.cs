@@ -7,6 +7,7 @@
 
     public class BandController : Controller
     {
+
         // GET: Band/id
         [ActionName("Index")]
         public async Task<ActionResult> IndexAsync(string id)

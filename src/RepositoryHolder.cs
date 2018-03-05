@@ -1,8 +1,8 @@
-﻿using vivace.Models;
+﻿using vivace.Controllers;
+using vivace.Models;
 
 namespace vivace
 {
-    /** Holds DocumentDBRepositories of all collections */
     public static class RepositoryHolder
     {
         public static DocumentDBRepository<User> Users;
